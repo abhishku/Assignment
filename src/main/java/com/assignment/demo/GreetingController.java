@@ -73,7 +73,6 @@ public class GreetingController {
 	  		}
 	   		if(!a)
 	   		{
-	   			System.out.println(new StringBuilder(urlo.url));
 	   			urlrepo=new Url(new Long(currentUserName),new StringBuilder(urlo.url),new StringBuilder(encodedId),new Long(0));
   				urlrepository.save(urlrepo); // It saves all the URL's as every account can generate their unique shortened URL
   				return "{ shortUrl: "+"'http://localhost:8080/"+encodedId+"' }";
@@ -84,8 +83,7 @@ public class GreetingController {
    
    @RequestMapping(value = "/{id}", method=RequestMethod.GET)
    public RedirectView redirectUrl(@PathVariable String id, HttpServletRequest request, HttpServletResponse response) throws IOException, URISyntaxException, Exception {
-	
-	   System.out.println(id);
+
 	   Iterable<Url> urllist=urlrepository.findAll();
   		for (Url url2 : urllist)
   		{
@@ -97,7 +95,6 @@ public class GreetingController {
 					       redirectView.setUrl(redirectUrlString);
 					       else
 					    	   redirectView.setUrl("http://" + redirectUrlString);
-					       System.out.println(redirectView.getUrl());
 					       url2.setHitcounts(url2.getHitcounts()+1);
 					       urlrepository.delete(url2);
 					       urlrepository.save(url2);
