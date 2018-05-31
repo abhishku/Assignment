@@ -48,6 +48,18 @@ public class GreetingController {
         }      
     }
     
+    
+    @RequestMapping(value = "/help", method = RequestMethod.GET,produces = "application/json")
+    public String helppage () {
+       String helpmessage=new String (""
+       		+ "UrlShortner Service"
+       		+ "\n 1. For accountRegistration : Please go to http://localhost:8080/account"
+       		+ "\n 2. For Reigistration of URL and getting the list of shortened URL's: http://localhost:8080/register"
+       		+ "\n 3. For Redirection : Please go to http://localhost:8080/Shortened_URL"
+       		+ "\n 4. For Statistics : Please add the authorization Header and go to http://localhost:8080/statistic/Account_Id");
+	return helpmessage;
+    }
+    
    @Autowired
    private UrlRepository urlrepository;
 
@@ -117,7 +129,6 @@ public class GreetingController {
 	return "{ "+responsestat.toString().replace("[","").replace("]","")+" }";
 	
    }
-   
     private final InMemoryUserDetailsManager inMemoryUserDetailsManager;
     public GreetingController(InMemoryUserDetailsManager inMemoryUserDetailsManager) {
 		this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
